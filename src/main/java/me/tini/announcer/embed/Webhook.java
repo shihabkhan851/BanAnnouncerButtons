@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.CompletableFuture;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -89,7 +90,17 @@ public class Webhook {
         }
     }
 
-    public void sendTo(String webhookUrl) throws IOException {
+    public void sendTo(final String webhookUrl) {
+        CompletableFuture.runAsync(() -> {
+            try {
+                sendTo0(webhookUrl);
+            } catch (IOException e) {
+                new RuntimeException("Failed to send embed message", e).printStackTrace();
+            }
+        });
+    }
+
+    private void sendTo0(String webhookUrl) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) new URL(webhookUrl).openConnection();
         conn.setRequestMethod("POST");
         conn.addRequestProperty("User-Agent", "Mozilla/5.0");

@@ -34,6 +34,7 @@ import me.tini.announcer.extension.impl.essentialsjail.EssentialsJailExtension;
 import me.tini.announcer.extension.impl.libertybans.LibertyBansExtension;
 import me.tini.announcer.extension.impl.litebans.LiteBansExtension;
 import me.tini.announcer.extension.impl.maxbans.MaxBansExtension;
+import me.tini.announcer.extension.impl.ultrapunishments.UltraPunishmentsExtension;
 import me.tini.command.bukkit.IBukkitPlugin;
 
 public class BanAnnouncerBukkit extends JavaPlugin implements BanAnnouncerPlugin, IBukkitPlugin, IMessenger {
@@ -50,12 +51,54 @@ public class BanAnnouncerBukkit extends JavaPlugin implements BanAnnouncerPlugin
 
         announcer.loadExtensions(new File(getDataFolder(), "extensions"));
 
-        announcer.registerExtension("AdvancedBan", "advancedban", () -> new AdvancedBanExtensionBukkit(this), "me.leoko.advancedban.Universal");
-        announcer.registerExtension("LiteBans"   , "litebans"   , () -> new LiteBansExtension(this)      , "litebans.api.Events");
-        announcer.registerExtension("LibertyBans", "libertybans", () -> new LibertyBansExtension(this)   , "space.arim.libertybans.api.LibertyBans");
-        announcer.registerExtension("MaxBansPlus", "maxbans"    , () -> new MaxBansExtension(this)       , "org.maxgamer.maxbans.MaxBansPlus");
-        announcer.registerExtension("BetterJails", "betterjails", () -> new BetterJailsExtension(this)   , "com.github.fefo.betterjails.api.BetterJails");
-        announcer.registerExtension("EssentialsX", "essentials" , () -> new EssentialsJailExtension(this), "net.ess3.api.events.JailStatusChangeEvent");
+        announcer.registerExtension(
+            "AdvancedBan",
+            "advancedban",
+            () -> new AdvancedBanExtensionBukkit(this),
+            "me.leoko.advancedban.Universal"
+        );
+
+        announcer.registerExtension(
+            "LiteBans",
+            "litebans",
+            () -> new LiteBansExtension(this),
+            "litebans.api.Events"
+        );
+
+        announcer.registerExtension(
+            "LibertyBans",
+            "libertybans",
+            () -> new LibertyBansExtension(this),
+            "space.arim.libertybans.api.LibertyBans"
+        );
+
+        announcer.registerExtension(
+            "MaxBansPlus",
+            "maxbans",
+            () -> new MaxBansExtension(this),
+            "org.maxgamer.maxbans.MaxBansPlus"
+        );
+
+        announcer.registerExtension(
+            "BetterJails",
+            "betterjails",
+            () -> new BetterJailsExtension(this),
+            "com.github.fefo.betterjails.api.BetterJails"
+        );
+
+        announcer.registerExtension(
+            "EssentialsX",
+            "essentials",
+            () -> new EssentialsJailExtension(this),
+            "net.ess3.api.events.JailStatusChangeEvent"
+        );
+
+        announcer.registerExtension(
+            "UltraPunishments",
+            "ultrapunishments",
+            () -> new UltraPunishmentsExtension(this),
+            "me.TechsCode.UltraPunishments.UltraPunishmentsAPI"
+        );
 
         announcer.enableExtensions();
 
